@@ -1,9 +1,0 @@
-server:
-  port: 8081
-
-application:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/db
-    username: root
-    password: Ao4eiT2w

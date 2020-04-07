@@ -1,6 +1,7 @@
 application:
   admin:
     password: "{bcrypt}$2a$10$N7tHgHhjvt.4AsnW9nMqduLrYLdKFEsP5GKBUPdeIB5emQ5Uz5nlC"
+    password1: "{bcrypt}$2a$10$jXI7IkpEVqv7Qq.UfQUhO.353gfrtL/qxPFHLZMinUFw5KObS54mi"
 
 server:
   port: 9090
