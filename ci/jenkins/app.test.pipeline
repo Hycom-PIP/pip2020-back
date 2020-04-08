@@ -8,18 +8,8 @@ pipeline {
             }
       stage('Run') {
                 steps {
-
-                     sh ' java -jar -Dspring.profiles.active=fullTests api/target/api.jar &'
-
-                     sh '''#!/bin/bash
-                     while :
-                     do
-                     	if [ "$(curl --silent http://localhost:8081/hello &)" ]; then
-                                     break
-                         fi
-                     done
-                     '''
-
+                     sh 'java -jar -Dspring.profiles.active=test api/target/api.jar &'
+                     sh 'sleep 7s'
                      dir('integration-tests') {
                              sh 'mvn test -PfullTests'
                      }
