@@ -16,7 +16,7 @@ pipeline {
                      do
                      	if [ "$(netstat -an | grep 'LISTENING' | grep '8081')" ]; then
                                      break
-                             fi
+                         fi
                      done
                      '''
 
