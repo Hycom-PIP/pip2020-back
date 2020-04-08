@@ -17,7 +17,7 @@ pipeline {
                                    dir('integration-tests') {
                                         sh 'mvn test -PfullTests'
                                     }
-                                    kill $(cat ./pid.file)
+                                    sh 'kill $(cat ./pid.file)'
                  }
              )
          }
