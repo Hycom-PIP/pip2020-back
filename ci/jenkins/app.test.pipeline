@@ -10,7 +10,19 @@ pipeline {
                 steps {
 
                      sh ' java -jar -Dspring.profiles.active=fullTests api/target/api.jar &'
-                     sh 'sleep 10s'
+
+                     sh '''#!/bin/bash
+                     while true
+                     do
+                        if [ -z "$(sudo netstat -a | grep '8081')" ] then
+                            break
+                        fi
+                        else
+                            echo "nie !"
+                        fi
+                     done
+                     '''
+
                      dir('integration-tests') {
                              sh 'mvn test -PfullTests'
                      }
