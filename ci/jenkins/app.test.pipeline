@@ -10,17 +10,15 @@ pipeline {
          steps {
              parallel (
                 "stream 1": {
-                   sh '''#!/bin/bash
-                     java -jar -Dspring.profiles.active=fullTests api/target/api.jar &
-                     echo $! > ./pid.file &
-                     '''
+                     sh ' java -jar -Dspring.profiles.active=fullTests api/target/api.jar &
+                     echo $! > ./pid.file &'
                 },
                  "stream 2" : {
-                                   sh 'sleep 10s'
-                                   dir('integration-tests') {
-                                        sh 'mvn test -PfullTests'
-                                    }
-                                    sh 'kill $(cat ./pid.file)'
+                     sh 'sleep 10s
+                     dir('integration-tests') {
+                             sh 'mvn test -PfullTests'
+                     }
+                     sh 'kill $(cat ./pid.file)'
                  }
              )
          }
