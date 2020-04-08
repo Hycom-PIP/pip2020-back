@@ -14,7 +14,7 @@ pipeline {
                      sh '''#!/bin/bash
                      while :
                      do
-                     	if [ "$(curl http://localhost:8081/hello &)" ]; then
+                     	if [ "$(curl --silent http://localhost:8081/hello &)" ]; then
                                      break
                          fi
                      done
