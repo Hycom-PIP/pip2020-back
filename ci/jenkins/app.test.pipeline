@@ -10,8 +10,7 @@ pipeline {
          steps {
              parallel (
                 "stream 1": {
-                     sh ' java -jar -Dspring.profiles.active=fullTests api/target/api.jar &
-                     echo $! > ./pid.file &'
+                     sh ' java -jar -Dspring.profiles.active=fullTests api/target/api.jar  & echo $! > ./pid.file &'
                 },
                  "stream 2" : {
                      sh 'sleep 10s
