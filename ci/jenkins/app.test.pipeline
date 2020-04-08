@@ -6,27 +6,22 @@ pipeline {
                     sh 'mvn clean install -DskipTests'
                 }
             }
-        stage('Run') {
+      stage('Run') {
          steps {
              parallel (
                 "stream 1": {
-                             node {
-                                    sh 'java -jar -Dspring.profiles.active=fullTests api/target/api.jar'
-                               }
-                           },
+                     sh 'java -jar -Dspring.profiles.active=fullTests api/target/api.jar'
+                },
                  "stream 2" : {
-                             node {
                                    sh 'sleep 10s'
                                    echo 'Hello, Maven'
                                    dir('integration-tests') {
                                         sh 'mvn test -PfullTests'
                                     }
-
-                               }
-                               sh 'exit 0'
-                           }
-                    )
+                                    sh 'exit 0'
                  }
-        }
+             )
+         }
+      }
     }
 }
