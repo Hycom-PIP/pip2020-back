@@ -12,14 +12,11 @@ pipeline {
                      sh ' java -jar -Dspring.profiles.active=fullTests api/target/api.jar &'
 
                      sh '''#!/bin/bash
-                     while true
+                     while :
                      do
-                        if [ -z "$(sudo netstat -a | grep '8081')" ] then
-                            break
-                        fi
-                        else
-                            echo "nie !"
-                        fi
+                     	if [ "$(netstat -an | grep 'LISTENING' | grep '8081')" ]; then
+                                     break
+                             fi
                      done
                      '''
 
