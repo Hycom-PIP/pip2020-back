@@ -7,13 +7,14 @@ pipeline {
                 }
             }
         stage('Run') {
-        parallel (
-            "stream 1" : {
+         steps {
+             parallel (
+                "stream 1": {
                              node {
                                     sh 'java -jar -Dspring.profiles.active=fullTests api/target/api.jar'
                                }
                            },
-            "stream 2" : {
+                 "stream 2" : {
                              node {
                                    sh 'sleep 10s'
                                    echo 'Hello, Maven'
@@ -24,7 +25,8 @@ pipeline {
                                }
                                sh 'exit 0'
                            }
-                  )
+                    )
+                 }
         }
     }
 }
