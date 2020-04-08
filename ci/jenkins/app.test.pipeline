@@ -14,11 +14,10 @@ pipeline {
                 },
                  "stream 2" : {
                                    sh 'sleep 10s'
-                                   echo 'Hello, Maven'
                                    dir('integration-tests') {
                                         sh 'mvn test -PfullTests'
                                     }
-                                    sh 'exit 0'
+                                    sh 'mvn spring-boot:stop'
                  }
              )
          }
