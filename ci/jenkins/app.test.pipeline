@@ -14,7 +14,7 @@ pipeline {
                      sh '''#!/bin/bash
                      while :
                      do
-                     	if [ "$(netstat -an | grep 'LISTENING' | grep '8081')" ]; then
+                     	if [ "$(curl http://localhost:8081/hello &)" ]; then
                                      break
                          fi
                      done
