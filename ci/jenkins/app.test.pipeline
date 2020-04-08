@@ -13,7 +13,7 @@ pipeline {
                      sh ' java -jar -Dspring.profiles.active=fullTests api/target/api.jar  & echo $! > ./pid.file &'
                 },
                  "stream 2" : {
-                     sh 'sleep 10s
+                     sh 'sleep 10s'
                      dir('integration-tests') {
                              sh 'mvn test -PfullTests'
                      }
