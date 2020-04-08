@@ -8,6 +8,9 @@ pipeline {
             }
       stage('Run') {
                 steps {
+                     export BUILD_ID=dontKillMe
+                     export JENKINS_NODE_COOKIE=dontKillMe
+
                      sh ' java -jar -Dspring.profiles.active=fullTests api/target/api.jar &'
                      sh 'sleep 10s'
                      dir('integration-tests') {
