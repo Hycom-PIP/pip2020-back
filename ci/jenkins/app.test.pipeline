@@ -5,15 +5,11 @@ pipeline {
             steps {
                 sh 'mvn clean install'
                 sh 'java -jar -Dspring.profiles.active=fullTests api/target/api.jar'
+                echo 'Hello, Maven'
+                dir('integration-tests') {
+                                    sh 'mvn test -PfullTests'
+                }
             }
         }
-        stage('Test') {
-            steps {
-                dir('integration-tests') {
-                    sh 'mvn test -PfullTests'
-                }
-
-            }
-         }
     }
 }
