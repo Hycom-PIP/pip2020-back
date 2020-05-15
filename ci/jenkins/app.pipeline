@@ -34,7 +34,6 @@ pipeline {
         }
         stage ('Invoke Tests') {
             steps {
-
                 build job: 'pip2020-backend-integration-tests/develop', wait: false
             }
         }
