@@ -28,6 +28,8 @@ pipeline {
                 
                 docker-compose up -d --build --force-recreate
 
+                build job: 'pip2020-backend-integration-tests'
+                
                 '''
             }
         }
