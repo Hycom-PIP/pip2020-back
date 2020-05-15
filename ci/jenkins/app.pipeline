@@ -27,14 +27,14 @@ pipeline {
                 export JENKINS_NODE_COOKIE=dontKillMe
                 
                 echo 'ad'
-                rocketSend channel: 'backend', message: 'Message'
+                
                 
                 '''
             }
         }
         stage ('Invoke Tests') {
             steps {
-
+                rocketSend channel: 'backend', message: 'test'
                 build job: 'pip2020-backend-integration-tests/develop', wait: false
             }
         }
