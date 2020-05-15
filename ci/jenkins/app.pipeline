@@ -26,14 +26,15 @@ pipeline {
                 export BUILD_ID=dontKillMe
                 export JENKINS_NODE_COOKIE=dontKillMe
                 
-                docker-compose up -d --build --force-recreate
                 echo 'ad'
+                rocketSend channel: 'backend', message: 'Message'
                 
                 '''
             }
         }
         stage ('Invoke Tests') {
             steps {
+
                 build job: 'pip2020-backend-integration-tests/develop', wait: false
             }
         }
