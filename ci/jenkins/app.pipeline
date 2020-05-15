@@ -26,9 +26,14 @@ pipeline {
                 export BUILD_ID=dontKillMe
                 export JENKINS_NODE_COOKIE=dontKillMe
                
-                build job: 'pip2020-backend-integration-tests', propagate: true, wait: true
+                echo 'sd'
                 
                 '''
+            }
+        }
+        stage ('Invoke_pipelineA') {
+            steps {
+                build job: 'pip2020-backend-integration-tests'
             }
         }
     }
