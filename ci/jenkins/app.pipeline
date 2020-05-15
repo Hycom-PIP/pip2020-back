@@ -34,7 +34,7 @@ pipeline {
         }
         stage ('Invoke Tests') {
             steps {
-                rocketSend channel: 'backend', message: 'test'
+                rocketSend channel: 'backend', message: 'asdasd', trustSSL: true, webhookTokenCredentialId: '5453b4c6-2c48-415f-b622-bfba3a70b3b1'
                 build job: 'pip2020-backend-integration-tests/develop', wait: false
             }
         }
