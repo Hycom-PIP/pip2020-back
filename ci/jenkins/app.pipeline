@@ -33,7 +33,7 @@ pipeline {
         }
         stage ('Invoke_pipelineA') {
             steps {
-                build job: 'pip2020-backend-integration-tests'
+                build 'pip2020-backend-integration-tests'
             }
         }
     }
