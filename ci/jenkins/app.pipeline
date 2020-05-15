@@ -36,7 +36,7 @@ pipeline {
             steps {
 
                 rocketSend avatar: 'http://127.0.0.1:8080/jenkins/static/ff676c77/images/headshot.png', serverUrl: 'https://rocketchat.hycom.pl', message: 'My message', rawMessage: true,
-                         webhookTokenCredentialId: '5453b4c6-2c48-415f-b622-bfba3a70b3b1', trustSSL: true, channel: 'ip2020'
+                         webhookTokenCredentialId: '5453b4c6-2c48-415f-b622-bfba3a70b3b1', trustSSL: true, channel: '@adam.krzanowski.politechnikalodzka'
 
                 build job: 'pip2020-backend-integration-tests/develop', wait: false
             }
