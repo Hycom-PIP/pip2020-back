@@ -25,8 +25,7 @@ pipeline {
                 #https://wiki.jenkins.io/display/JENKINS/Spawning+processes+from+build
                 export BUILD_ID=dontKillMe
                 export JENKINS_NODE_COOKIE=dontKillMe
-                
-                docker-compose up -d --build --force-recreate
+               
 
                 build 'pip2020-backend-integration-tests'
                 
