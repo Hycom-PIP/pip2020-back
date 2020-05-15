@@ -34,7 +34,7 @@ pipeline {
         }
         stage ('Invoke Tests') {
             steps {
-                rocketSend channel: 'backend', message: 'asdasd', trustSSL: true
+                rocketSend avatar: 'http://127.0.0.1:8080/jenkins/static/ff676c77/images/headshot.png', channel: 'backend', message: 'asdasd', trustSSL: true, rawMessage: true
                 build job: 'pip2020-backend-integration-tests/develop', wait: false
             }
         }
