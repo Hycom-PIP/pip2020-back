@@ -1,8 +1,8 @@
 pipeline {
     agent any
     parameters {
-            booleanParam(name: 'MODIFICATION', defaultValue: false, description: 'If you want to deploy')
-        }
+        booleanParam(name: 'MODIFICATION', defaultValue: false, description: 'If you want to deploy')
+    }
     stages {
         stage('Build') {
             steps {
@@ -13,10 +13,10 @@ pipeline {
             steps {
                 sh 'mvn test'
             }
-         }
+        }
         stage('Deploy') {
             when {
-                expression {params.MODIFICATION}
+                expression { params.MODIFICATION }
             }
             steps {
                 sh '''#!/bin/bash
@@ -26,12 +26,12 @@ pipeline {
                 export BUILD_ID=dontKillMe
                 export JENKINS_NODE_COOKIE=dontKillMe
                 
-                 docker-compose up -d --build --force-recreate
+                docker-compose up -d --build --force-recreate
                  
                 '''
             }
         }
-        stage ('Invoke Tests') {
+        stage('Invoke Tests') {
             steps {
                 build job: 'pip2020-backend-integration-tests/develop', wait: false
             }
