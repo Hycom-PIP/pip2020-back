@@ -35,6 +35,7 @@ pipeline {
         stage ('Invoke Tests') {
             steps {
 
+
                 rocketSend avatar: 'http://127.0.0.1:8080/jenkins/static/ff676c77/images/headshot.png', serverUrl: 'https://rocketchat.hycom.pl', message: 'My message',
                          webhookTokenCredentialId: '5453b4c6-2c48-415f-b622-bfba3a70b3b1', channel: 'ip2020'
 
