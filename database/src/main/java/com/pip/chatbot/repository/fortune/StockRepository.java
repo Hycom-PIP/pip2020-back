@@ -41,6 +41,15 @@ public class StockRepository {
                 .fetchOptionalInto(Stock.class);
     }
 
+    public Optional<Stock> getCurrencyForActualDay(String symbol){
+        return dsl.selectFrom(STOCK)
+                .where(STOCK.SYMBOL.eq(symbol))
+                .and(STOCK.IS_HISTORICAL.eq(true))
+                .orderBy(STOCK.DATE.desc())
+                .limit(1)
+                .fetchOptionalInto(Stock.class);
+    }
+
     public List<Stock> getCurrenciesForPeriod(String symbol, LocalDate startDay, LocalDate endDay) {
                 return dsl.selectFrom(STOCK)
                         .where(STOCK.SYMBOL.eq(symbol))
