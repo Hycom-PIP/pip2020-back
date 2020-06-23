@@ -84,8 +84,8 @@ def populate_db():
                                         end=date.today())
                 logging.info(f"Stocks number: {len(stocks)}")
                 populate_table(stocks, symbol, cursor, True)
-
-            forecasts = predictions.learn_and_predict(symbol[0], date.today())
+            start_date = date.today() - timedelta(year=1)
+            forecasts = predictions.learn_and_predict(symbol[0], start_date, date.today())
             logging.info(f"Forecasts number: {len(forecasts)}")
 
             populate_table(forecasts, symbol, cursor, False)
