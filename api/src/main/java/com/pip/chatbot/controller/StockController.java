@@ -28,13 +28,22 @@ public class StockController {
                                 .orElseGet(LocalDate::now)), Stock.class));
     }
 
+    @GetMapping("/actual/{symbol}")
+    public ResponseEntity<Stock> getStockForActualDay(@PathVariable String symbol) {
+        return ResponseEntity
+                .ok()
+                .body(modelMapper.map(stockService.getForActualDay(symbol), Stock.class));
+    }
+
     @GetMapping("/period/{symbol}")
-    public ResponseEntity<List<Stock>> getStocksForPeriod(@PathVariable String symbol, @RequestParam String startDateParam, @RequestParam Optional<String> endDateParam) {
+    public ResponseEntity<List<Stock>> getStocksForPeriod(@PathVariable String symbol, @RequestParam String startDateParam,
+                                                          @RequestParam Optional<String> endDateParam) {
         return ResponseEntity
                 .ok()
                 .body(stockService.getForPeriod(symbol, LocalDate.parse(startDateParam, DateTimeFormatter.ISO_DATE),
                         endDateParam.map(date -> LocalDate.parse(date, DateTimeFormatter.ISO_DATE))
                                 .orElseGet(LocalDate::now)));
+
     }
 
     @GetMapping("/prediction/{symbol}")

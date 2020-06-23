@@ -27,6 +27,12 @@ public class StockService {
                 .orElseThrow(() -> new ChatbotExceptionBuilder().addError(StockErrorMessages.NOT_FOUND).build());
     }
 
+    public Stock getForActualDay(String symbol) {
+        return stockRepository.getForActualDay(symbol)
+                .orElseThrow(() -> new ChatbotExceptionBuilder().addError(StockErrorMessages.NOT_FOUND).build());
+    }
+
+
     public List<Stock> getForPeriod(String symbol, LocalDate startDay, LocalDate endDay) {
         return stockRepository.getCurrenciesForPeriod(symbol, startDay, endDay);
     }
