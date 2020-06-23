@@ -1,6 +1,8 @@
 import numpy as np
 import pandas_datareader as web
 import pandas as pd
+from datetime import date
+
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout
@@ -17,7 +19,14 @@ def split_sequences(seq, n_steps, n_steps_out):
         y.append(seq_y)
     return np.array(X),np.array(y)
 
-def learn_and_predict(stock_name, from_date, to_date):
+def addYears(d, years):
+    try:     
+        return d.replace(year = d.year + years)
+    except ValueError:        
+        return d + (date(d.year + years, 1, 1) - date(d.year, 1, 1))
+
+def learn_and_predict(stock_name, to_date):
+    from_date = addYears(to_date, -1)
     df = web.DataReader(stock_name, data_source='yahoo', start=from_date, end=to_date)
     data = df.filter(['Close'])
     scaler = MinMaxScaler()
