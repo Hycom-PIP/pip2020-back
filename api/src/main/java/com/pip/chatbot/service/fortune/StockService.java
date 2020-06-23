@@ -28,7 +28,7 @@ public class StockService {
     }
 
     public Stock getForActualDay(String symbol) {
-        return stockRepository.getCurrencyForActualDay(symbol)
+        return stockRepository.getForActualDay(symbol)
                 .orElseThrow(() -> new ChatbotExceptionBuilder().addError(StockErrorMessages.NOT_FOUND).build());
     }
 

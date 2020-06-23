@@ -41,7 +41,7 @@ public class StockRepository {
                 .fetchOptionalInto(Stock.class);
     }
 
-    public Optional<Stock> getCurrencyForActualDay(String symbol){
+    public Optional<Stock> getForActualDay(String symbol){
         return dsl.selectFrom(STOCK)
                 .where(STOCK.SYMBOL.eq(symbol))
                 .and(STOCK.IS_HISTORICAL.eq(true))
