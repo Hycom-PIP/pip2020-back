@@ -1,10 +1,10 @@
-import pandas_datareader as web
-import psycopg2 as pg
-from psycopg2 import extras
-import predictions
 import logging
+import pandas_datareader as web
+import predictions
+import psycopg2 as pg
 import time
 from datetime import date, timedelta, datetime
+from psycopg2 import extras
 
 HOST = "trainings"
 PORT = 5432
@@ -21,7 +21,8 @@ logging.basicConfig(level=logging.INFO)
 def populate_table(df, symbol, cursor, is_historical):
     data = df['Close'].to_numpy().flatten()
     indexes = df.index
-    extras.execute_values(cursor, "INSERT into stock(symbol, value, date, is_historical) values %s ON CONFLICT ON CONSTRAINT unique_symbol_date DO NOTHING",
+    extras.execute_values(cursor,
+                          "INSERT into stock(symbol, value, date, is_historical) values %s ON CONFLICT ON CONSTRAINT unique_symbol_date DO NOTHING",
                           [(symbol, data[i], indexes[i], is_historical) for i in range(len(indexes))])
 
 
@@ -84,13 +85,17 @@ def populate_db():
                                         end=date.today())
                 logging.info(f"Stocks number: {len(stocks)}")
                 populate_table(stocks, symbol, cursor, True)
-            start_date = date.today() - timedelta(year=1)
-            forecasts = predictions.learn_and_predict(symbol[0], start_date, date.today())
+            forecasts = predictions.learn_and_predict(symbol[0], predictions_start_date(), date.today())
             logging.info(f"Forecasts number: {len(forecasts)}")
 
             populate_table(forecasts, symbol, cursor, False)
 
             conn.commit()
+
+
+def predictions_start_date():
+    today = date.today()
+    return today.replace(today.year - 1)
 
 
 populate_flag = True
